@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="Pet Secure Accord is a pet tracking and management app with live location updates, device connectivity, safety alerts, subscriptions, and clear legal policies."
+  >
+  <meta name="theme-color" content="#BB7D26">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Pet Secure Accord">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="manifest" href="manifest.json">
+
+  <title>Pet Secure Accord | Pet Tracking App</title>
+
+  <style>
+    :root {
+      --primary: #bb7d26;
+      --primary-dark: #8b5a1a;
+      --primary-light: #d4975f;
+      --cream: #faf2e5;
+      --sand: #f5e6d3;
+      --card: rgba(255, 250, 242, 0.9);
+      --text: #26180d;
+      --muted: #6f5a46;
+      --line: rgba(139, 90, 26, 0.16);
+      --shadow: 0 20px 50px rgba(99, 63, 20, 0.14);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max-width: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(212, 151, 95, 0.28), transparent 32%),
+        radial-gradient(circle at top right, rgba(187, 125, 38, 0.22), transparent 30%),
+        linear-gradient(180deg, #fff8ee 0%, #f7e7d4 48%, #f1dcc2 100%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .shell {
+      width: min(var(--max-width), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(255, 248, 238, 0.82);
+      border-bottom: 1px solid rgba(139, 90, 26, 0.08);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: #fff;
+      font-size: 22px;
+      background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+      box-shadow: 0 10px 22px rgba(139, 90, 26, 0.25);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .nav .cta-link {
+      padding: 12px 18px;
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      box-shadow: 0 12px 24px rgba(139, 90, 26, 0.24);
+    }
+
+    .hero {
+      padding: 64px 0 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-card,
+    .section-card,
+    .policy-card,
+    .download-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 38px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.65);
+      color: var(--primary-dark);
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    summary {
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    h1 {
+      margin: 22px 0 14px;
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-copy p {
+      max-width: 60ch;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      box-shadow: 0 14px 28px rgba(139, 90, 26, 0.24);
+    }
+
+    .button-secondary {
+      color: var(--primary-dark);
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(139, 90, 26, 0.12);
+    }
+
+    .hero-notes {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .chip {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(139, 90, 26, 0.09);
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .pet-strip {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .pet-avatar {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      border: 4px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 12px 22px rgba(99, 63, 20, 0.16);
+    }
+
+    .pet-caption {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .hero-card {
+      padding: 28px;
+      background:
+        linear-gradient(180deg, rgba(255, 253, 248, 0.95), rgba(243, 225, 200, 0.95));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .phone-frame {
+      border-radius: 30px;
+      padding: 18px;
+      background: linear-gradient(180deg, var(--primary-light), var(--primary-dark));
+      color: #fff;
+      min-height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-frame::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -60px auto;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .screen-card {
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 22px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+
+    .screen-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .metric {
+      flex: 1;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.14);
+    }
+
+    .metric strong,
+    .stat strong {
+      display: block;
+      font-size: 1.25rem;
+      margin-bottom: 6px;
+    }
+
+    .metric span,
+    .stat span {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.9rem;
+    }
+
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    section {
+      padding: 24px 0;
+    }
+
+    .section-head {
+      max-width: 58ch;
+      margin-bottom: 22px;
+    }
+
+    #about,
+    #features,
+    #policies,
+    #download {
+      scroll-margin-top: 108px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1.02rem;
+    }
+
+    .info-grid,
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .section-card {
+      padding: 24px;
+    }
+
+    .section-card h3 {
+      margin: 14px 0 10px;
+      font-size: 1.5rem;
+    }
+
+    .about-visuals {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .about-photo {
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(139, 90, 26, 0.1);
+      text-align: center;
+    }
+
+    .about-photo img {
+      width: 84px;
+      height: 84px;
+      margin: 0 auto 10px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 14px rgba(99, 63, 20, 0.12));
+    }
+
+    .about-photo span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .section-card p,
+    .section-card li,
+    .download-card p,
+    .policy-card li {
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .icon-badge {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(212, 151, 95, 0.22), rgba(187, 125, 38, 0.2));
+      color: var(--primary-dark);
+      font-size: 1.4rem;
+    }
+
+    .feature-list,
+    .policy-card ul {
+      margin: 14px 0 0;
+      padding-left: 18px;
+    }
+
+    .policy-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .policy-card {
+      padding: 24px 24px 8px;
+    }
+
+    .policy-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      background: rgba(212, 151, 95, 0.14);
+      color: var(--primary-dark);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    details {
+      border-top: 1px solid rgba(139, 90, 26, 0.12);
+      padding: 16px 0;
+    }
+
+    details:first-of-type {
+      border-top: 0;
+    }
+
+    summary {
+      cursor: pointer;
+      font-size: 1.35rem;
+      font-weight: 700;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .policy-body {
+      padding-top: 14px;
+    }
+
+    .policy-group {
+      margin-bottom: 20px;
+    }
+
+    .policy-group h3 {
+      margin: 0 0 8px;
+      font-size: 1.12rem;
+    }
+
+    .download-card {
+      padding: 30px;
+      background:
+        linear-gradient(135deg, rgba(139, 90, 26, 0.96), rgba(187, 125, 38, 0.94));
+      color: #fff;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .download-card p {
+      color: rgba(255, 255, 255, 0.82);
+      margin: 0;
+    }
+
+    .download-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .download-actions .button-primary {
+      background: #fff;
+      color: var(--primary-dark);
+      box-shadow: none;
+    }
+
+    .download-actions .button-secondary {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    footer {
+      padding: 28px 0 48px;
+      color: var(--muted);
+    }
+
+    .footer-line {
+      padding-top: 18px;
+      border-top: 1px solid rgba(139, 90, 26, 0.12);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .download-card,
+      .info-grid,
+      .feature-grid,
+      .hero-notes,
+      .about-visuals {
+        grid-template-columns: 1fr;
+      }
+
+      .download-actions {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 40px;
+      }
+
+      .hero-copy,
+      .hero-card,
+      .policy-card,
+      .download-card,
+      .section-card {
+        padding: 22px;
+      }
+
+      .screen-row,
+      .stat-strip {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark">PS</span>
+        <span>Pet Secure Accord</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#policies">Policies</a>
+        <a href="#download" class="cta-link">Download App</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Pet tracking and safety</span>
+          <h1>Keep your pets visible, connected, and protected.</h1>
+          <p>
+            Pet Secure Accord helps pet owners manage tracking devices, follow live
+            location updates, receive important alerts, and stay on top of account,
+            subscription, and support needs in one place.
+          </p>
+
+          <div class="hero-actions">
+            <!-- APK Download from Google Drive -->
+            <a
+              class="button button-primary"
+              href="https://drive.google.com/file/d/1hV8ev_IaEI9v2FsgWqqm-sCfWNqop4R6/view?usp=drive_link"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Download APK
+            </a>
+            <a class="button button-secondary" href="#policies">Read Policies</a>
+          </div>
+
+          <div class="hero-notes">
+            <div class="chip">Real-time pet location visibility</div>
+            <div class="chip">BLE and MQTT device connectivity</div>
+            <div class="chip">Geofence, battery, and safety alerts</div>
+            <div class="chip">Secure sign-in and subscription billing</div>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="App highlights">
+          <div class="phone-frame">
+            <strong style="font-size: 1.35rem;">Your pet management app</strong>
+            <div class="screen-card">
+              <div class="screen-row">
+                <div class="metric">
+                  <strong>Live Maps</strong>
+                  <span>Follow movement with real-time location updates.</span>
+                </div>
+                <div class="metric">
+                  <strong>Smart Alerts</strong>
+                  <span>Get notified for SOS, battery, and geofence events.</span>
+                </div>
+              </div>
+              <div class="screen-row" style="margin-bottom: 0;">
+                <div class="metric">
+                  <strong>Secure Billing</strong>
+                  <span>Manage paid plans with third-party payment processing.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="stat-strip">
+              <div class="stat">
+                <strong>Maps</strong>
+                <span>OpenStreetMap-based tracking</span>
+              </div>
+              <div class="stat">
+                <strong>Auth</strong>
+                <span>Email and Google sign-in</span>
+              </div>
+              <div class="stat">
+                <strong>Devices</strong>
+                <span>ESP32 tracker support</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="shell">
+        <div class="section-head">
+          <h2>About the app</h2>
+          <p>
+            Pet Secure Accord is built for pet owners who want better visibility into
+            their pets, their connected trackers, and the health of their monitoring
+            setup. The app combines tracking, alerts, account management, and payment
+            flows in a single mobile experience.
+          </p>
+        </div>
+
+        <div class="info-grid">
+          <article class="section-card">
+            <div class="icon-badge">TR</div>
+            <h3>Tracking</h3>
+            <p>
+              View live pet locations, browse history, and monitor activity, signal,
+              and battery data from connected devices.
+            </p>
+
+          </article>
+
+          <article class="section-card">
+            <div class="icon-badge">IO</div>
+            <h3>Connectivity</h3>
+            <p>
+              The app supports Bluetooth Low Energy connectivity and MQTT-based data
+              streaming so device updates stay responsive and useful.
+            </p>
+          </article>
+
+          <article class="section-card">
+            <div class="icon-badge">AC</div>
+            <h3>Account and billing</h3>
+            <p>
+              Users can sign in securely, manage pet profiles, and access paid plans
+              backed by third-party payment handling.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="shell">
+        <div class="section-head">
+          <h2>Core features</h2>
+          <p>
+            Everything on this site is based on the app's current project copy and
+            in-app legal screens, so visitors get a simple overview before downloading.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="section-card">
+            <div class="icon-badge">MP</div>
+            <h3>Live maps and movement</h3>
+            <ul class="feature-list">
+              <li>Real-time pet location tracking on interactive maps.</li>
+              <li>History access for recent location activity.</li>
+              <li>Quick visibility into tracker battery and signal strength.</li>
+            </ul>
+          </article>
+
+          <article class="section-card">
+            <div class="icon-badge">AL</div>
+            <h3>Alerts that matter</h3>
+            <ul class="feature-list">
+              <li>Critical notifications for geofence and safety events.</li>
+              <li>Battery and device-status warnings for connected trackers.</li>
+              <li>Support for keeping pet owners informed in real time.</li>
+            </ul>
+          </article>
+
+          <article class="section-card">
+            <div class="icon-badge">PY</div>
+            <h3>Subscriptions and payments</h3>
+            <ul class="feature-list">
+              <li>Paid plan support with secure third-party checkout.</li>
+              <li>Clear billing, refund, and usage rules.</li>
+              <li>Policy-aware experience for account and payment flows.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="policies">
+      <div class="shell">
+        <div class="section-head">
+          <h2>Policies</h2>
+          <p>
+            This page includes the app's privacy policy, terms and conditions, and
+            refund policy in a web-friendly format. Last updated: 25 March 2026.
+          </p>
+        </div>
+
+        <div class="policy-stack">
+          <article class="policy-card">
+            <div class="policy-meta">Privacy Policy</div>
+            <details open>
+              <summary>How we collect, use, and protect information</summary>
+              <div class="policy-body">
+                <div class="policy-group">
+                  <h3>Information we collect</h3>
+                  <ul>
+                    <li>We may collect your name, email address, login method, profile details, and connected device information.</li>
+                    <li>Pet-related details such as pet name, breed, age, weight, activity, and tracker status may be stored to power the app experience.</li>
+                    <li>Payment transactions are handled by secure third-party providers such as Razorpay. We do not store full card information or PII inside the app.</li>
+                  </ul>
+                </div>
+
+                <div class="policy-group">
+                  <h3>How we use information</h3>
+                  <ul>
+                    <li>To create and manage your account, sync your pets and devices, and keep your subscription active.</li>
+                    <li>To send critical notifications such as geofence alerts, low battery warnings, billing confirmations, and support replies.</li>
+                    <li>To improve app reliability, troubleshoot issues, and understand which features are most helpful to pet owners.</li>
+                  </ul>
+                </div>
+
+                <div class="policy-group">
+                  <h3>How we share information</h3>
+                  <ul>
+                    <li>We may share limited data with service providers that help us deliver authentication, cloud storage, notifications, analytics, and payments.</li>
+                    <li>We may disclose information when required by law, to protect user safety, or to investigate fraud and misuse.</li>
+                    <li>We do not sell your personal information to advertisers or data brokers.</li>
+                  </ul>
+                </div>
+
+                <div class="policy-group">
+                  <h3>Data retention and security</h3>
+                  <ul>
+                    <li>We retain data only for as long as it is needed for account operations, compliance, dispute handling, or legitimate business needs.</li>
+                    <li>We use reasonable administrative and technical safeguards, but no system can be guaranteed to be completely secure.</li>
+                    <li>You can request updates or deletion of profile information by contacting support through the app&apos;s help channels.</li>
+                  </ul>
+                </div>
+              </div>
+            </details>
+          </article>
+
+          <article class="policy-card">
+            <div class="policy-meta">Terms &amp; Conditions</div>
+            <details>
+              <summary>Rules and responsibilities for using the service</summary>
+              <div class="policy-body">
+                <div class="policy-group">
+                  <h3>Use of the service</h3>
+                  <ul>
+                    <li>You must provide accurate registration details and keep your login credentials secure.</li>
+                    <li>You are responsible for how your account, connected devices, and pet profiles are used.</li>
+                    <li>You agree not to misuse the service, interfere with the app, reverse engineer protected systems, or attempt fraudulent payments.</li>
+                  </ul>
+                </div>
+
+                <div class="policy-group">
+                  <h3>Subscriptions and billing</h3>
+                  <ul>
+                    <li>Paid plans may renew or be billed according to the plan details shown at checkout or inside your subscription settings.</li>
+                    <li>Prices, trial offers, and available features may change, but material billing changes should be shown before they apply to a new charge.</li>
+                    <li>Third-party payment providers may apply their own terms, security checks, and transaction processing rules.</li>
+                  </ul>
+                </div>
+
+                <div class="policy-group">
+                  <h3>Service availability</h3>
+                  <ul>
+                    <li>We aim to keep tracking, alerts, and billing available, but uptime cannot be guaranteed at all times.</li>
+                    <li>Some features depend on internet access, Bluetooth availability, device battery, permissions, and third-party platforms.</li>
+                    <li>We may update, suspend, or discontinue features when needed for maintenance, safety, or product changes.</li>
+                  </ul>
+                </div>
+
+                <div class="policy-group">
+                  <h3>Liability and account actions</h3>
+                  <ul>
+                    <li>The app is designed to support pet monitoring, but it should not be treated as emergency, veterinary, or law-enforcement advice.</li>
+                    <li>To the maximum extent permitted by law, PetSecure Accord is not liable for indirect, incidental, or consequential damages arising from app use.</li>
+                    <li>We may suspend or terminate accounts that violate these terms, create security risks, or involve abusive or fraudulent behavior.</li>
+                  </ul>
+                </div>
+              </div>
+            </details>
+          </article>
+
+          <article class="policy-card">
+            <div class="policy-meta">Refund Policy</div>
+            <details>
+              <summary>How refund requests are reviewed and processed</summary>
+              <div class="policy-body">
+                <div class="policy-group">
+                  <h3>Eligible refund scenarios</h3>
+                  <ul>
+                    <li>You may request a refund for duplicate payments, accidental double charges, or charges caused by a clear technical error.</li>
+                    <li>Refunds may also be considered when a paid plan was charged but not activated within a reasonable time after successful payment.</li>
+                    <li>Unauthorized transactions should be reported immediately so they can be reviewed with the payment provider.</li>
+                  </ul>
+                </div>
+
+                <div class="policy-group">
+                  <h3>Non-refundable situations</h3>
+                  <ul>
+                    <li>Completed billing cycles, partial plan usage, or dissatisfaction with features alone may not qualify for a refund.</li>
+                    <li>Delays caused by bank processing, card issuer checks, or network interruptions are not automatically refundable.</li>
+                    <li>Promotional, discounted, or trial conversion payments may be non-refundable where clearly disclosed before purchase.</li>
+                  </ul>
+                </div>
+
+                <div class="policy-group">
+                  <h3>How to request a refund</h3>
+                  <ul>
+                    <li>Contact support with your registered email address, transaction reference, payment date, and the reason for your request.</li>
+                    <li>Include screenshots or receipts whenever possible to speed up verification.</li>
+                    <li>Approved refunds are processed back to the original payment method and may take additional banking time to appear.</li>
+                  </ul>
+                </div>
+
+                <div class="policy-group">
+                  <h3>Review timeline</h3>
+                  <ul>
+                    <li>Refund requests should be submitted as soon as possible after the charge appears.</li>
+                    <li>Our team will review each request individually and may ask for extra details before making a decision.</li>
+                    <li>If a refund is denied, we will share the reason and, when possible, suggest the next best support path.</li>
+                  </ul>
+                </div>
+              </div>
+            </details>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="download">
+      <div class="shell">
+        <div class="download-card">
+          <div>
+            <h2 style="margin: 0 0 12px; font-size: clamp(2rem, 4vw, 3rem);">Download Pet Secure Accord</h2>
+            <p>
+              Ready to try the app? Use the Android download link below to open the
+              current store listing URL tied to this project setup.
+            </p>
+          </div>
+
+          <div class="download-actions">
+            <!-- APK Download from Google Drive -->
+            <a
+              class="button button-primary"
+              href="https://drive.google.com/file/d/1hV8ev_IaEI9v2FsgWqqm-sCfWNqop4R6/view?usp=drive_link"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Download APK from Drive
+            </a>
+            <a class="button button-secondary" href="#policies">View Policies</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-line">
+      <span>Pet Secure Accord</span>
+      <span>Pet tracking, account management, policies, and download access in one place.</span>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const targetId = link.getAttribute("href");
+
+        if (!targetId || targetId === "#") {
+          return;
+        }
+
+        const target = document.querySelector(targetId);
+
+        if (!target) {
+          return;
+        }
+
+        event.preventDefault();
+
+        const headerOffset = 92;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth"
+        });
+      });
+    });
+  </script>
+</body>
+</html>

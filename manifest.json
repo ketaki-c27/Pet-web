@@ -1,0 +1,35 @@
+{
+    "name": "Pet Secure Accord",
+    "short_name": "PetSecure",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#FAF2E5",
+    "theme_color": "#BB7D26",
+    "description": "Pet tracking and management with live location updates, alerts, billing, and policy access.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
