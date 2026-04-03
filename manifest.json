@@ -3,7 +3,7 @@
     "short_name": "PetSecure",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#FAF2E5",
+    "background_color": "#F5E6D3",
     "theme_color": "#BB7D26",
     "description": "Pet tracking and management with live location updates, alerts, billing, and policy access.",
     "orientation": "portrait-primary",
